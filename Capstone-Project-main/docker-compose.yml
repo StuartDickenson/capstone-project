@@ -1,0 +1,22 @@
+version: '3'
+services:
+  app:  
+   container_name: 'capstoneapp'
+   restart: 'always'
+   build: .
+   ports:
+    - '3001:3001'
+   volumes:
+     - ./:/usr/src/app
+     - /usr/src/app/node_modules
+   depends_on: 
+     - mongo
+  mongo:
+    container_name: mongodb
+    image: mongo
+    volumes:
+      - mongodb:/data/db
+    ports: 
+      - '27017:27017'
+volumes:
+   mongodb:
